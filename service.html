@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Mohsin Akber</title>
+
+  <!-- Icons (Unicons) if needed for uil classes -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="service.css" />
+</head>
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <header class="main-header">
+    <div class="logo">Mohsin <span>Akber</span></div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="service.html" class="active">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="service-hero">
+    <!-- Your image -->
+    <img src="mohsin.jpg" alt="Mohsin Akber" class="hero-photo" />
+
+    <span class="pill"><span class="pill-dot"></span> Services</span>
+    <h1>What I Can Do For You</h1>
+    <p class="subtext">
+      Full‑stack development, creative editing, and clean design — all in one place.
+    </p>
+  </section>
+
+  <!-- ========== CATEGORY TABS ========== -->
+  <section class="category-tabs">
+    <button class="tab active" data-category="all">All</button>
+    <button class="tab" data-category="frontend">Frontend</button>
+    <button class="tab" data-category="backend">Backend</button>
+    <button class="tab" data-category="editing">Editing</button>
+    <button class="tab" data-category="other">Other</button>
+  </section>
+
+  <!-- ========== SERVICES GRID ========== -->
+  <main>
+    <div class="services-grid" id="servicesGrid">
+      <!-- Frontend -->
+      <article class="service-card" data-category="frontend">
+        <div class="service-icon gradient-green"><i class="uil uil-window"></i></div>
+        <h3>Frontend Development</h3>
+        <p>Pixel‑perfect, responsive, and modern UIs with animations and clean layouts.</p>
+        <ul>
+          <li>Responsive websites</li>
+          <li>UI/UX + micro‑interactions</li>
+          <li>Component‑based structure</li>
+        </ul>
+      </article>
+
+      <!-- Backend -->
+      <article class="service-card" data-category="backend">
+        <div class="service-icon gradient-blue"><i class="uil uil-server"></i></div>
+        <h3>Backend Development</h3>
+        <p>Secure server‑side logic, API building, and database‑powered features.</p>
+        <ul>
+          <li>REST API development</li>
+          <li>Authentication systems</li>
+          <li>Database CRUD apps</li>
+        </ul>
+      </article>
+
+      <!-- Video editing -->
+      <article class="service-card" data-category="editing">
+        <div class="service-icon gradient-purple"><i class="uil uil-video"></i></div>
+        <h3>Video Editing</h3>
+        <p>Cinematic edits, reels, YouTube videos, transitions and basic motion graphics.</p>
+        <ul>
+          <li>Reels & short edits</li>
+          <li>Color grading & sound balance</li>
+          <li>Text overlays & effects</li>
+        </ul>
+      </article>
+
+      <!-- Photo editing -->
+      <article class="service-card" data-category="editing">
+        <div class="service-icon gradient-orange"><i class="uil uil-image"></i></div>
+        <h3>Photo Editing</h3>
+        <p>Professional retouching, enhancements, poster design, and social‑ready exports.</p>
+        <ul>
+          <li>Color correction & grading</li>
+          <li>Skin retouching</li>
+          <li>Poster/banner design</li>
+        </ul>
+      </article>
+
+      <!-- SEO -->
+      <article class="service-card" data-category="other">
+        <div class="service-icon gradient-red"><i class="uil uil-chart"></i></div>
+        <h3>SEO Optimization</h3>
+        <p>Boost your website ranking with SEO‑friendly structure & content planning.</p>
+        <ul>
+          <li>Meta tag optimization</li>
+          <li>Speed improvements</li>
+          <li>Keyword structure advice</li>
+        </ul>
+      </article>
+
+      <!-- Freelance -->
+      <article class="service-card" data-category="other">
+        <div class="service-icon gradient-yellow"><i class="uil uil-briefcase"></i></div>
+        <h3>Freelance Work</h3>
+        <p>Custom websites, editing, branding & digital assets tailored to your needs.</p>
+        <ul>
+          <li>Portfolio & business sites</li>
+          <li>Branding assets</li>
+          <li>Social media creatives</li>
+        </ul>
+      </article>
+    </div>
+  </main>
+
+  <!-- ========== CTA SECTION ========== -->
+  <section class="cta">
+    <h2>Let's Build Something Great Together</h2>
+    <p>If you need a website, edit, or digital asset — I am here to help.</p>
+
+    <!-- Scroll directly to contact form on contact page -->
+    <a href="contact.html#contact" class="cta-btn">Contact Me</a>
+  </section>
+  
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    © 2025 Mohsin Akber — Crafted with ❤️
+  </footer>
+
+  <!-- JS (simple filter for tabs, optional) -->
+  <script src="service.js"></script>
+</body>
+</html>

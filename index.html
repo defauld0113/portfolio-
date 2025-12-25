@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic meta tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohsin Akber | Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <!-- Main external stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Component‑specific extra styles (photo + resume button) -->
+  <style>
+    /* Circular photo wrapper in hero card */
+    .hero-photo-wrapper {
+      position: relative;
+      width: 170px;
+      height: 170px;
+      border-radius: 999px; /* fully round */
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 1);
+      box-shadow: 0 0 0 4px rgba(88, 209, 138, 0.35);
+      background: x #2241ca;
+    }
+
+    .hero-photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* keep aspect ratio with cropping */
+      display: block;
+    }
+
+    /* Container for navbar actions on the right */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Resume button in navbar */
+    .btn-resume-nav {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        border-color 0.15s ease,
+        background- 0.15s ease,
+        transform 0.12s ease;
+    }
+
+    .btn-resume-nav i {
+      font-size: 0.85rem;
+      color: #22c55e;
+    }
+
+    .btn-resume-nav:hover {
+      border-color: rgba(34, 197, 94, 0.9);
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Main wrapper for the whole page -->
+  <div class="page-wrap">
+    <!-- ====================== NAVBAR ====================== -->
+    <header>
+      <nav class="nav">
+        <!-- Logo + name on the left -->
+        <div class="nav-left">
+          <div class="nav-logo">M</div>
+          <div class="nav-title">
+            <span class="nav-title-main">Mohsin Akber</span>
+            <span class="nav-title-sub">B.Tech • Full‑Stack Web Dev</span>
+          </div>
+        </div>
+
+        <!-- Mobile navigation toggle (hamburger icon) -->
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Navigation links (anchors to sections) -->
+        <div class="nav-links" id="navLinks">
+          <a href="#hero">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <a href="service.html">Services</a>
+        </div>
+
+        <!-- Right side: resume, contact, theme toggle -->
+        <div class="nav-actions">
+          <!-- Download resume (expects docs/Mohsin_Akber_Resume.pdf file) -->
+          <a href="MOHSINcv.pdf" download class="btn-resume-nav">
+            <i class="fas fa-file-arrow-down"></i>
+            Resume
+          </a>
+
+          <!-- Scroll to contact section -->
+          <button
+            class="nav-cta"
+            type="button"
+            onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+          >
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+          </button>
+
+          <!-- Theme toggle button (night / light) used by JS in main.js -->
+          <button id="themeToggle" class="btn-outline" type="button">
+            <i class="fas fa-moon"></i>
+            <span>Night</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ====================== MAIN CONTENT ====================== -->
+    <main>
+      <!-- ========== HERO SECTION ========== -->
+      <section id="hero">
+        <!-- Left: main hero text -->
+        <div class="hero-left">
+          <!-- Main hero heading and subheading -->
+          <h3 class="hero-greeting">Hello, it's me</h3>
+          <h1 class="hero-name">Mohsin Akber</h1>
+          <h2 class="hero-role">
+            And I'm a <span class="role-text">Back‑end Developer</span>
+          </h2>
+
+          <p class="hero-subtitle">
+            B.Tech student and full‑stack web developer working on front‑end and back‑end, with
+            strong skills in Python, C, Java OOP, and editing.
+          </p>
+
+          <!-- Tags showing quick skill summary -->
+          <div class="hero-tags">
+            <span class="tag">Front‑end</span>
+            <span class="tag">Back‑end</span>
+            <span class="tag">Full‑stack</span>
+            <span class="tag">Python</span>
+            <span class="tag">C</span>
+            <span class="tag">Java</span>
+            <span class="tag">Editing</span>
+            <span class="tag">Data analytics</span>
+          </div>
+
+          <!-- Primary calls‑to‑action -->
+          <div class="hero-cta-row">
+            <!-- Scroll to projects -->
+            <button
+              class="btn-primary"
+              type="button"
+              onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})"
+            >
+              <i class="fas fa-play"></i>
+              View projects
+            </button>
+
+            <!-- Scroll to contact -->
+            <button
+              class="btn-outline"
+              type="button"
+              onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+            >
+              <i class="fas fa-paper-plane"></i>
+              Let’s work together
+            </button>
+
+            <!-- Second resume button in hero -->
+            <a href="MOHSINcv.pdf" download class="btn-outline">
+              <i class="fas fa-file-arrow-down"></i>
+              Download resume
+            </a>
+          </div>
+
+          <!-- Quick meta info (name, role, location) -->
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Name</span>
+              <span class="hero-meta-value">Mohsin Akber</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Role</span>
+              <span class="hero-meta-value">Full‑Stack Web Developer</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Location</span>
+              <span class="hero-meta-value">Anantnag, J&K • 192129</span>
+            </div>
+          </div>
+        </div>
+        
+
+        <!-- Right hero card with photo + current focus -->
+         
+        <div class="hero-right">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <!-- Avatar/photo block -->
+              <div class="hero-avatar">
+                <div class="hero-photo-wrapper">
+                  <!-- Your actual photo file should exist at this path (same folder as index.html) -->
+                   
+                  <img src="mohsin.jpg" alt="Photo of Mohsin Akber" />
+                  <!-- LIGHTBOX -->
+
+
+
+                </div>
+                <div class="avatar-meta">
+                  <span>Mohsin Akber</span>
+                  <span>Full‑Stack Web Dev • B.Tech</span>
+                </div>
+              </div>
+            </div>
+            
+            
+
+            <!-- Short description of current focus + mini skill pills -->
+            <div class="hero-card-body">
+              <h3>Current focus</h3>
+              <p>
+                Sharpening full‑stack web development: structuring front‑end UIs, designing
+                back‑end logic, and strengthening Python, C, and object‑oriented Java.
+              </p>
+              <div class="skills-grid">
+                <div class="skill-pill">Front‑end</div>
+                <div class="skill-pill">Back‑end</div>
+                <div class="skill-pill">Data analytics</div>
+                <div class="skill-pill">Python</div>
+                <div class="skill-pill">C</div>
+                <div class="skill-pill">Java</div>
+                
+              </div>
+            </div>
+
+            <!-- Footer info in hero card -->
+            <div class="hero-card-footer">
+              <span>Student at <strong>Dr. B.C. Roy Engineering College</strong></span>
+              <span>Updated: <strong>2025</strong></span>
+            </div>
+
+            <!-- Decorative orbit icon -->
+            <div class="hero-orbit">
+              <div class="hero-orbit-dot">
+                <i class="fas fa-database"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+<hr>
+
+
+
+      <!-- ========== ABOUT SECTION ========== -->
+      <section id="about">
+        <!-- Small pill label -->
+        <div class="pill" style="margin-bottom: 10px;">
+          <span class="pill-dot"></span>
+          About
+        </div>
+        <h2 class="section-heading">A bit about Myself</h2>
+        <p class="section-subtitle">Background • College • Journey</p>
+
+        <div class="content">
+          <!-- Left column: text + metrics -->
+          <div>
+            <p class="about-text">
+             I’m Mohsin Akber, a full-stack web developer and B.Tech student currently studying at Dr. B.C. Roy Engineering College, Durgapur.
+             Coming from Anantnag, Jammu & Kashmir, I’ve always been curious about how technology works and how ideas turn into functional applications.
+            </p>
+            <p class="about-text">
+             I enjoy working on both the front-end (UI, design, responsiveness) and the back-end (logic, APIs, databases).
+My core skills include Python, C, Java, and modern full-stack web development.
+
+I’m constantly learning new tools, building projects, and improving my understanding of clean code and problem-solving. My goal is to create meaningful digital experiences and grow as a developer every day.
+            </p>
+
+            <!-- Highlight box describing personal traits -->
+            <div class="about-highlight">
+              <i class="fas fa-lightbulb"></i>
+              <div>
+                <strong>What defines Mohsin</strong><br />
+                Consistency, curiosity about how full‑stack systems work, and the ability to learn
+                new tools while keeping code readable and structured.
+              </div>
+            </div>
+
+            <!-- Three small metric cards -->
+            <div class="about-metrics">
+              <div class="metric-card">
+                <div class="metric-value">Student</div>
+                <div class="metric-label">B.Tech in Engineering</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">Full‑stack</div>
+                <div class="metric-label">Front‑end & back‑end</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">Growth</div>
+                <div class="metric-label">Always learning</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: simple timeline -->
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-title">B.Tech Student</div>
+              <div class="timeline-meta">Dr. B.C. Roy Engineering College, Durgapur</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-title">From Anantnag, J&K</div>
+              <div class="timeline-meta">Anantnag, Jammu and Kashmir</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-title">Full‑stack web dev & editing</div>
+              <div class="timeline-meta">Front‑end • Back‑end • Content editing</div>
+            </div>
+          </div>
+        </div>
+      </section>
+<hr>
+      <!-- ========== SKILLS SECTION ========== -->
+      <section id="skills">
+        <div class="pill" style="margin-bottom: 10px;">
+          <span class="pill-dot"></span>
+          Skills
+        </div>
+        <h2 class="section-heading">Tech toolkit</h2>
+        <p class="section-subtitle">Full‑stack • Programming • Editing</p>
+
+        <div class="skills-layout">
+          <!-- Left: categorized skill chips -->
+          <div>
+            <div class="skills-category">
+              <div class="skills-category-title">Web development</div>
+              <div class="chip-row">
+                <span class="chip">Front‑end</span>
+                <span class="chip">Back‑end</span>
+                <span class="chip">Full‑stack thinking</span>
+                <span class="chip">Responsive UI</span>
+              </div>
+            </div>
+
+            <div class="skills-category">
+              <div class="skills-category-title">Programming</div>
+              <div class="chip-row">
+                <span class="chip">Python</span>
+                <span class="chip">C</span>
+                <span class="chip">OOP (Java)</span>
+              </div>
+            </div>
+
+            <div class="skills-category">
+              <div class="skills-category-title">Other skills</div>
+              <div class="chip-row">
+                <span class="chip">Editing</span>
+                <span class="chip">Problem solving</span>
+                <span class="chip">Team collaboration</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: progress bars and bullet points -->
+          <div class="skills-card">
+            <div class="skills-card-header">
+              <span>Focus areas</span>
+              <span>Improving every semester</span>
+            </div>
+
+            <!-- Progress bars using data-level attribute -->
+            <div class="skill-bars">
+              <div class="skill-bar" data-level="80">
+                <div class="skill-bar-label">
+                  <span>Full‑stack web development</span>
+                  <span>80%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill"></div></div>
+              </div>
+
+              <div class="skill-bar" data-level="80">
+                <div class="skill-bar-label">
+                  <span>Python & C programming</span>
+                  <span>80%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill"></div></div>
+              </div>
+
+              <div class="skill-bar" data-level="75">
+                <div class="skill-bar-label">
+                  <span>OOP in Java</span>
+                  <span>75%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill"></div></div>
+              </div>
+
+              <div class="skill-bar" data-level="70">
+                <div class="skill-bar-label">
+                  <span>Editing & content</span>
+                  <span>70%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill"></div></div>
+              </div>
+            </div>
+
+            <!-- Short bullet‑point description -->
+            <ul class="skills-card-list">
+              <li>Connecting front‑end and back‑end to build complete apps.</li>
+              <li>Practicing data structures, logic, and clean code in Python, C, and Java.</li>
+              <li>Using editing skills to present work clearly and professionally.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+<hr>
+      <!-- ========== PROJECTS SECTION (placeholders) ========== -->
+      <section id="projects">
+        <div class="pill" style="margin-bottom: 10px;">
+          <span class="pill-dot"></span>
+          Projects
+        </div>
+        <h2 class="section-heading">Projects</h2>
+        <p class="section-subtitle">Will be added soon</p>
+
+        <div class="grid">
+          <!-- Project card 1 placeholder -->
+          <article class="project-card">
+            <div class="project-thumb">
+              Full‑stack and back‑end projects will be added here soon.
+            </div>
+            <h3 class="project-title">Coming soon</h3>
+            <p class="project-meta">
+              Mohsin is working on web apps that connect front‑end UIs with back‑end logic and
+              databases.
+            </p>
+            <div class="project-tags">
+              <span>Full‑stack</span>
+              <span>Back‑end</span>
+            </div>
+          </article>
+
+          <!-- Project card 2 placeholder -->
+          <article class="project-card">
+            <div class="project-thumb">
+              Keep an eye on this space for full‑stack examples.
+            </div>
+            <h3 class="project-title">Coming soon</h3>
+            <p class="project-meta">
+              This section will show details like tech stack, features, and links to code and live
+              demos.
+            </p>
+            <div class="project-tags">
+              <span>Front‑end</span>
+              <span>Back‑end</span>
+              <span>Practice</span>
+            </div>
+          </article>
+
+          <!-- Project card 3 placeholder -->
+          <article class="project-card">
+            <div class="project-thumb">
+              Once projects are ready, they will appear here with GitHub and live links.
+            </div>
+            <h3 class="project-title">Coming soon</h3>
+            <p class="project-meta">
+              Future projects will include full‑stack web apps and core programming exercises.
+            </p>
+            <div class="project-tags">
+              <span>Python</span>
+              <span>C</span>
+              <span>Java</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ========== CONTACT SECTION (address + social + form) ========== -->
+      <section id="contact">
+        <div class="pill" style="margin-bottom: 10px;">
+          <span class="pill-dot"></span>
+          Contact
+        </div>
+        <h2 class="section-heading">Get in touch</h2>
+        <p class="section-subtitle">From Anantnag to Durgapur</p>
+
+        <div class="contact-layout">
+          <!-- Left: static contact info + social links -->
+          <div class="contact-card">
+            <div class="contact-row">
+              <i class="fas fa-location-dot"></i>
+              <div>
+                <strong>Address</strong><br />
+                <span>Anantnag, Jammu and Kashmir • Studying in Durgapur</span>
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <i class="fas fa-school"></i>
+              <div>
+                <strong>College</strong><br />
+                <span>Dr. B.C. Roy Engineering College, Durgapur</span>
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <i class="fas fa-graduation-cap"></i>
+              <div>
+                <strong>Course</strong><br />
+                <span>B.Tech</span>
+              </div>
+            </div>
+
+            <!-- Email address (clickable mailto link) -->
+            <div class="contact-row">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Email</strong><br />
+                <span>
+                  <a
+                    href="mailto:mohsinakber807@gmail.com"
+                    style="color:#e5e7eb; text-decoration:none;"
+                  >
+                    mohsinakber807@gmail.com
+                  </a>
+                </span>
+              </div>
+            </div>
+
+            <!-- Social icons -->
+            <div class="contact-row" style="margin-top: 12px;">
+              <i class="fas fa-share-nodes"></i>
+              <div>
+                <strong>Social</strong><br />
+                <div class="social-links">
+                  <!-- GitHub: placeholder -->
+                 <a 
+                  href="https://github.com/mohsinakber807"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                 >
+                    <i class="fab fa-github"></i>
+                 </a>
+                  <!-- LinkedIn profile -->
+                  <a
+                    href="https://www.linkedin.com/in/mohsin-akber-04b283386"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn"
+                  >
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <!-- Instagram profile -->
+                  <a
+                    href="https://www.instagram.com/mo_hs_in_04"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Instagram"
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <!-- Facebook: not available yet -->
+                  <a
+                    href="javascript:void(0)"
+                    title="Facebook not available yet"
+                    aria-label="Facebook"
+                  >
+                    <i class="fab fa-facebook"></i>
+                  </a>
+                </div>
+                <span
+                  style="display:block; margin-top:6px; font-size:0.78rem; color:#9ca3af;"
+                >
+                  Facebook: not available yet.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: contact form that sends email via formsubmit.co -->
+          <div class="contact-card">
+            <form
+              id="contactForm"
+              action="https://formsubmit.co/mohsinakber807@gmail.com"
+              method="POST"
+            >
+              <!-- Disable captcha on formsubmit.co -->
+              <input type="hidden" name="_captcha" value="false" />
+              <!-- Format email as a simple table -->
+              <input type="hidden" name="_template" value="table" />
+              <!-- Subject line of email you receive -->
+              <input type="hidden" name="_subject" value="New message from portfolio" />
+              <!-- Redirect URL after successful submit (replace with your real GitHub Pages / domain) -->
+              <input
+                type="hidden"
+                name="_next"
+                value="https://your-domain-or-github-page-url"
+              />
+
+              <!-- Visitor name -->
+              <div>
+                <label for="name">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+
+              <!-- Visitor email -->
+              <div>
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+
+              <!-- Subject line -->
+              <div>
+                <label for="subject">Subject</label>
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  placeholder="Project idea, question, etc."
+                />
+              </div>
+
+              <!-- Message body -->
+              <div>
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Write your message to Mohsin."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Footer of the form (info + submit button) -->
+              <div class="form-footer">
+                <p class="form-note">
+                  This form sends directly to my email via formsubmit.co.
+                </p>
+                <button type="submit" class="btn-primary">
+                  <i class="fas fa-paper-plane"></i>
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====================== FOOTER ====================== -->
+    <footer>
+      Designed &amp; built by Mohsin Akber • 2025
+    </footer>
+  </div>
+
+  <!-- Main JavaScript file (handles nav toggle, theme toggle, animations, etc.) -->
+  <script src="main.js"></script>
+</body>
+</html>

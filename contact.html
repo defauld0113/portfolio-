@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Mohsin Akber</title>
+
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <!-- Contact page CSS -->
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body>
+  <div class="page-wrap">
+    <!-- ========== NAVBAR ========== -->
+    <header class="main-header">
+      <div class="logo">Mohsin <span>Akber</span></div>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="service.html">Services</a>
+        <a href="contact.html#contact" class="active">Contact</a>
+      </nav>
+    </header>
+
+    <!-- ========== CONTACT HERO ========== -->
+    <section class="contact-hero">
+      <!-- Your image -->
+      <img src="mohsin.jpg" alt="Mohsin Akber" class="hero-photo" />
+
+      <span class="pill"><span class="pill-dot"></span> Contact</span>
+      <h1>Let’s Work Together</h1>
+      <p class="hero-subtext">
+        Have an idea, project, or collaboration? Send a message and get a quick response.
+      </p>
+    </section>
+
+    <!-- ========== CONTACT CONTENT ========== -->
+    <main>
+      <section id="contact" class="contact-section">
+        <div class="contact-layout">
+          <!-- LEFT: Info & Social -->
+          <div class="contact-card info-card">
+            <h2>Reach Me</h2>
+            <p class="info-text">
+              Available for freelance, project work, and collaborations in web development and editing.
+            </p>
+
+            <!-- Email -->
+            <div class="contact-row">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Email</strong><br />
+                <span>mohsinakber807@gmail.com</span>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="contact-row">
+              <i class="fas fa-location-dot"></i>
+              <div>
+                <strong>Location</strong><br />
+                <span>India</span>
+              </div>
+            </div>
+
+            <!-- Social icons -->
+            <div class="contact-row" style="margin-top: 12px;">
+              <i class="fas fa-share-nodes"></i>
+              <div>
+                <strong>Social</strong><br />
+                <div class="social-links">
+                  <!-- GitHub: placeholder -->
+                 <a 
+                  href="https://github.com/mohsinakber807"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                 >
+                    <i class="fab fa-github"></i>
+                 </a>
+
+                  <!-- LinkedIn -->
+                  <a
+                    href="https://www.linkedin.com/in/mohsin-akber-04b283386"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn"
+                  >
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+
+                  <!-- Instagram -->
+                  <a
+                    href="https://www.instagram.com/mo_hs_in_04"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Instagram"
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </a>
+
+                  <!-- Facebook: placeholder -->
+                  <a
+                    href="javascript:void(0)"
+                    title="Facebook not available yet"
+                    aria-label="Facebook"
+                  >
+                    <i class="fab fa-facebook"></i>
+                  </a>
+                </div>
+                <span class="social-note">
+               Facebook: not available yet.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Form -->
+          <div class="contact-card form-card">
+            <h2>Send a Message</h2>
+            <p class="info-text">
+              Fill the form below. It will be delivered directly to my inbox via formsubmit.co.
+            </p>
+
+            <form
+              id="contactForm"
+              action="https://formsubmit.co/mohsinakber807@gmail.com"
+              method="POST"
+            >
+              <!-- formsubmit config -->
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_subject" value="New message from portfolio" />
+              <!-- TODO: replace with your deployed URL after hosting -->
+              <input
+                type="hidden"
+                name="_next"
+                value="https://your-domain-or-github-page-url"
+              />
+
+              <!-- Name -->
+              <div class="field">
+                <label for="name">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="field">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+
+              <!-- Subject -->
+              <div class="field">
+                <label for="subject">Subject</label>
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  placeholder="Project idea, question, etc."
+                />
+              </div>
+
+              <!-- Message -->
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Write your message to Mohsin."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Footer -->
+              <div class="form-footer">
+                <p class="form-note">
+                  This form uses <span>formsubmit.co</span> — no backend required.
+                </p>
+                <button type="submit" class="btn-primary">
+                  <i class="fas fa-paper-plane"></i>
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+      © 2025 Mohsin Akber — Crafted with ❤️
+    </footer>
+  </div>
+
+  <!-- JS -->
+  <script src="contact.js"></script>
+</body>
+</html>

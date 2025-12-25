@@ -1,0 +1,1252 @@
+/* =========================================================
+   THEME VARIABLES (DARK / NIGHT DEFAULT)
+   - All colors and radii are defined here so themes are easy
+     to switch using data-theme="light" on <html>.
+   ========================================================= */
+:root {
+  /* Core background and accent colors (dark mode) */
+  --bg-color: #050816;                  /* Main page background */
+  --bg-alt: #0b1120;                    /* Alternate background (panels, gradients) */
+  --accent: #598769;                    /* Main accent color (green-ish) */
+  --accent-soft: rgba(34, 197, 94, 0.15); /* Soft accent for subtle glows */
+
+  /* Text colors */
+  --text-main: #e5e7eb;                 /* Primary text */
+  --text-muted: #9ca3af;                /* Secondary / muted text */
+
+  /* Cards, borders and shadows */
+  --border-soft: rgba(148, 163, 184, 0.3);
+  --card-bg: rgba(15, 23, 42, 0.9);     /* Default card background */
+  --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.7);
+
+  /* Radii and layout sizes */
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-full: 999px;
+  --nav-height: 72px;                   /* Fixed navbar height */
+}
+
+/* ---------------------------------------------------------
+   LIGHT THEME VARIATION
+   - Activated when <html data-theme="light">
+   - JS (applyTheme) toggles this attribute.
+   --------------------------------------------------------- */
+html[data-theme="light"] {
+  --bg-color: #f9fafb;
+  --bg-alt: #e5e7eb;
+  --accent: #16a34a;
+  --accent-soft: rgba(34, 197, 94, 0.1);
+
+  --text-main: #020617;
+  --text-muted: #4b5563;
+
+  --border-soft: rgba(148, 163, 184, 0.5);
+  --card-bg: #ffffff;
+  --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+/* =========================================================
+   GLOBAL RESET & BASE STYLES
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;               /* Include padding/border in width/height */
+}
+
+html {
+  scroll-behavior: smooth;              /* Smooth anchor scrolling */
+}
+
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Dark radial gradient background behind full page */
+  background: radial-gradient(circle at top, #1d2233 0, #020617 45%, #000 100%);
+  color: var(--text-main);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   PAGE LAYOUT WRAPPER
+   - Holds header, main, and footer.
+   - Adds soft background glows.
+   ========================================================= */
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  background:
+    radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.25), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(34, 197, 94, 0.18), transparent 55%),
+    linear-gradient(to bottom, #020617 0, #020617 25%, #020617 100%);
+}
+
+/* Main content area centered with max width */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 96px 20px 72px;
+}
+
+/* Base section layout:
+   - vertical spacing is combined here with fade-in transitions (see .in-view below). */
+section {
+  padding: 80px 0 0;
+  opacity: 0;                           /* Hidden by default, revealed via JS */
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Section state when it scrolls into view (set by JS) */
+section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Headings shared styles */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #9da1ab;
+  padding-top: 0px
+}
+
+/* Section main heading */
+.section-heading {
+  font-size: 2.1rem;
+  margin-bottom: 0.2rem;
+}
+
+/* Section subtitle with uppercase tracking */
+.section-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 2.1rem;
+}
+
+/* Small capsule label before section heading (e.g., About, Skills) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* Small glowing dot inside pill */
+.pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+}
+
+/* =========================================================
+   NAVBAR
+   - Sticky, glassmorphism bar with hover glow.
+   ========================================================= */
+
+/* Full-width sticky header shell (clicks handled by .nav) */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  z-index: 40;
+  pointer-events: none;                 /* Allow .nav to be interactive instead */
+}
+
+/* Main navbar container */
+.nav {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* Glassmorphism + gradient background */
+  background: linear-gradient(
+    90deg,
+    rgba(7, 10, 16, 0.9),
+    rgba(92, 113, 161, 0.82)
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+
+  /* Soft glow + subtle inner border */
+  box-shadow:
+    0 1px 0 0 rgba(148, 163, 184, 0.25),
+    0 0 0 1px rgba(15, 23, 42, 0.6);
+
+  /* Smooth interaction transitions */
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.25s ease;
+  pointer-events: auto;
+}
+
+/* Slight lift and glow when hovering across navbar */
+.nav:hover {
+  transform: translateY(1px);
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.65),
+    0 1px 0 0 rgba(34, 197, 94, 0.35);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+/* Extra glow when hovering header region (optional) */
+header:hover .nav {
+  box-shadow:
+    0 12px 40px rgba(15, 23, 42, 0.9),
+    0 5px 0 0 rgba(34, 197, 94, 0.35);
+}
+
+/* Left side: logo + text */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Square-ish logo with gradient background and "M" initial */
+.nav-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 20% 0, #22c55e, #22c55e 18%, #16a34a 50%, #052e16 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f2f2f4;
+  font-weight: 700;
+  font-size: 0.98rem;
+  box-shadow: 0 12px 30px rgba(22, 163, 74, 0.7);
+}
+
+/* Container for nav main title + subtitle */
+.nav-title {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Name text */
+.nav-title-main {
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+/* Subtext under name */
+.nav-title-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Horizontal nav links (desktop) */
+.nav-links {
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+}
+
+/* Nav link style */
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease;
+}
+
+/* Animated underline on hover (gradient bar) */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(to right, #22c55e, #22d3ee);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* Hover state: brighter text + underline fill */
+.nav-links a:hover {
+  color: #f9fafb;
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Call-to-action button in navbar (Contact) */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background:
+    radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.22), transparent 60%),
+    rgba(15, 23, 42, 0.9);
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #e5e7eb;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    border-color 0.2s ease;
+}
+
+.nav-cta i {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+/* Hover: slight lift + accent border */
+.nav-cta:hover {
+  border-color: rgba(5, 160, 70, 0.9);
+  transform: translateY(-1px);
+}
+
+/* Hamburger icon (only visible on small screens via media query) */
+.nav-toggle {
+  margin-left: 0.5rem;
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #e5e7eb;
+  background: none;
+  border: none;
+}
+
+/* =========================================================
+   HERO SECTION
+   - Intro text on the left, hero card on the right.
+   - Includes animated role text and hover tilt card.
+   ========================================================= */
+#hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.1fr);
+  gap: 40px;
+  align-items: center;
+  padding-top: 15px;
+}
+
+/* Hero left text area */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  gap:0px;
+}
+
+/* Sub-greeting above name */
+.hero-greeting {
+  font-size: 2rem;
+  color: var(--text-muted);
+}
+/* Main name heading with gradient text */
+.hero-name {
+  font-size: clamp(2.6rem, 5vw, 3.3rem); /* bigger name */
+  margin-bottom: 1px;                    /* less space below */
+  font-weight: 700;
+  letter-spacing: 0.02em;                /* a bit tighter */
+
+  background: linear-gradient(to right, #22c55e, #22d3ee);
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Role line text */
+.hero-role {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+
+
+/* Animated role span */
+.role-text {
+  display: inline-block;
+  color: #22c55e; /* green typing color */
+  white-space: nowrap; /* keeps text on one line */
+}
+
+/* Fade-out state */
+.role-text.fade-out {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* Fade-in state + brighter green */
+.role-text.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  color: #4ade80; /* lighter green during active state */
+}
+
+
+
+/* Short subtitle paragraph under hero title */
+.hero-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* Row of small skill tags in hero */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Individual hero tag chip */
+.tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+/* CTAs row (buttons + resume) */
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+/* Primary action button (View projects) */
+.btn-primary {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #22c55e, #22d3ee);
+  color: #020617;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 14px 35px rgba(45, 212, 191, 0.5);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.1s ease;
+}
+
+.btn-primary i {
+  font-size: 0.86rem;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 45px rgba(45, 212, 191, 0.65);
+  filter: brightness(1.03);
+}
+
+/* Secondary outline button (used for Contact / Resume) */
+.btn-outline {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.98);
+  color: var(--text-main);
+  font-size: 0.86rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.12s ease;
+}
+
+.btn-outline i {
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.btn-outline:hover {
+  border-color: rgba(34, 197, 94, 0.9);
+  background: rgba(15, 23, 42, 1);
+  transform: translateY(-1px);
+}
+
+/* Row with name / role / location under hero */
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.hero-meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-meta-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  margin-bottom: 3px;
+}
+
+.hero-meta-value {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+/* Right hero column (card container) */
+.hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================================
+   HERO CARD DETAILS
+   ========================================================= */
+
+/* Base hero card styling */
+.hero-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.2), transparent 65%),
+    radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.18), transparent 65%),
+    #020617;
+  padding: 26px 22px 22px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+
+  /* Smooth hover / entrance transitions */
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.45s ease;
+}
+
+/* Stronger shadow state (JS toggles this) */
+.hero-card-floating {
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+}
+
+/* Hero card header: avatar + optional badge area */
+.hero-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+/* Avatar container (photo + text) */
+.hero-avatar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Text next to avatar */
+.avatar-meta span:first-child {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.avatar-meta span:last-child {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Hero card body: description + mini skill pills */
+.hero-card-body {
+  background:
+    radial-gradient(circle at 50% -50%, rgba(34, 197, 94, 0.4), transparent 60%),
+    rgba(15, 23, 42, 0.95);
+  border-radius: 20px;
+  padding: 14px 14px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  margin-bottom: 14px;
+}
+
+.hero-card-body h3 {
+  font-size: 0.98rem;
+  margin-bottom: 8px;
+}
+
+.hero-card-body p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Grid of small skill pills inside card */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.skill-pill {
+  font-size: 0.75rem;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  text-align: center;
+  color: #e5e7eb;
+}
+
+/* Card footer: college + updated text */
+.hero-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.hero-card-footer span strong {
+  color: #e5e7eb;
+  font-weight: 600;
+}
+
+/* Decorative orbit ring with icon in bottom-left of card */
+.hero-orbit {
+  position: absolute;
+  inset: auto auto -18px -18px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px dashed rgba(148, 163, 184, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.hero-orbit-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 0, #22c55e, #16a34a 50%, #052e16 100%);
+  color: #f0fdf4;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.8);
+}
+
+/* Extra CSS for photo glow (class added by JS) */
+.hero-photo-wrapper img {
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.hero-photo-glow {
+  filter: drop-shadow(0 0 18px rgba(34, 197, 94, 0.8));
+}
+
+/* =========================================================
+   ABOUT SECTION
+   ========================================================= */
+#about .content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 30px;
+}
+
+/* About text paragraphs */
+.about-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+/* Highlight box ("What defines Mohsin") */
+.about-highlight {
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  font-size: 0.86rem;
+  display: flex;
+  gap: 12px;
+}
+
+.about-highlight i {
+  color: var(--accent);
+  margin-top: 3px;
+}
+
+/* Metric cards (Student / Full-stack / Growth) */
+.about-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.metric-card {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Small hover effect on metric cards */
+.metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.8);
+}
+
+.metric-value {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.metric-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Simple timeline on right */
+.timeline {
+  border-radius: var(--radius-md);
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  padding: 14px 16px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 14px;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Dot marker for each timeline entry */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.25);
+}
+
+.timeline-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.timeline-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   SKILLS SECTION
+   ========================================================= */
+#skills .skills-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;     /* Left: chip lists, Right: card with bars */
+  gap: 26px;
+}
+
+.skills-category {
+  margin-bottom: 20px;
+}
+
+.skills-category-title {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+/* Chip rows for each skill category */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  font-size: 0.78rem;
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--text-main);
+}
+
+/* Vertical list of skill bars */
+.skill-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Composite skill bar block (label + track + fill) */
+.skill-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+}
+
+/* Label row for skill bar: name + percentage */
+.skill-bar-label {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Background track for bar */
+.bar-track {
+  width: 100%;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+/* Foreground fill of bar (width animated via data-level) */
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to right, #22c55e, #22d3ee);
+  width: 0;                             /* Start empty; width set below */
+  transition: width 1s ease;
+}
+
+/* Set width based on data-level attribute */
+.skill-bar[data-level="90"] .bar-fill { width: 90%; }
+.skill-bar[data-level="85"] .bar-fill { width: 85%; }
+.skill-bar[data-level="80"] .bar-fill { width: 80%; }
+.skill-bar[data-level="75"] .bar-fill { width: 75%; }
+.skill-bar[data-level="70"] .bar-fill { width: 70%; }
+
+/* Card wrapper around right-side skills (bars + bullets) */
+.skills-card {
+  padding: 16px 16px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.8);
+}
+
+.skills-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.86rem;
+}
+
+.skills-card-header span:last-child {
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+/* Bulleted explanation under skill bars */
+.skills-card-list {
+  list-style: none;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* =========================================================
+   PROJECTS SECTION
+   ========================================================= */
+#projects .grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Single project card */
+.project-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  padding: 14px 14px 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease,
+    background 0.16s ease;
+}
+
+/* Hover: subtle lift + glow */
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  border-color: rgba(34, 197, 94, 0.9);
+  background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.12), rgba(15, 23, 42, 1));
+}
+
+/* Project thumbnail area (currently text placeholder) */
+.project-thumb {
+  height: 150px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  background:
+    radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.28), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(34, 211, 238, 0.25), transparent 55%),
+    #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e7eb;
+  font-size: 0.8rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  text-align: center;
+  padding: 0 10px;
+}
+
+.project-title {
+  font-size: 0.95rem;
+  margin-bottom: 3px;
+}
+
+.project-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* Tag row under project description */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.74rem;
+}
+
+.project-tags span {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: var(--text-muted);
+}
+
+/* Optional link buttons (Live / Code) */
+.project-links {
+  position: absolute;
+  inset: auto 10px 10px auto;
+  display: flex;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.project-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.project-links a:hover {
+  color: #e5e7eb;
+  border-color: rgba(34, 197, 94, 0.9);
+}
+
+/* =========================================================
+   CONTACT SECTION
+   ========================================================= */
+#contact .contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 26px;
+}
+
+/* Card container for contact info and form */
+.contact-card {
+  padding: 18px 18px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.96);
+}
+
+/* Individual info rows (icon + text) */
+.contact-row {
+  margin-bottom: 12px;
+  font-size: 0.86rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-row i {
+  color: var(--accent);
+  font-size: 1.05rem;
+  width: 18px;
+  text-align: center;
+}
+
+.contact-row span {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+/* Social icon row */
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.social-links a {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  background: rgba(15, 23, 42, 0.96);
+  text-decoration: none;
+  transition:
+    transform 0.12s ease,
+    border-color 0.12s ease,
+    background 0.12s ease;
+}
+
+/* Hover: lift and highlight social icons */
+.social-links a:hover {
+  transform: translateY(-1px);
+  background: rgba(15, 23, 42, 1);
+  border-color: rgba(34, 197, 94, 0.9);
+}
+
+/* Contact form grid layout */
+form {
+  display: grid;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+
+/* Form labels */
+label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Form inputs and textarea */
+input,
+textarea {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  font-family: inherit;
+  font-size: 0.86rem;
+  outline: none;
+  transition:
+    border-color 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease,
+    transform 0.12s ease;
+}
+
+/* Focus state: glow + slight lift */
+input:focus,
+textarea:focus {
+  border-color: rgba(34, 197, 94, 0.9);
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.6);
+  background: rgba(15, 23, 42, 1);
+  transform: translateY(-1px);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Footer row in form (note + submit button) */
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.form-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 14px 20px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+
+/* Medium screens: stack main grids vertically, shrink projects grid */
+@media (max-width: 960px) {
+  #hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Show hero card above text on smaller screens */
+  .hero-right {
+    order: -1;
+  }
+
+  #about .content,
+  #skills .skills-layout,
+  #contact .contact-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #projects .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+  main {
+    padding-top: 86px;
+  }
+
+  /* Convert nav links into dropdown under navbar */
+  .nav-links {
+    position: absolute;
+    inset: var(--nav-height) 0 auto 0;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.45);
+    padding: 10px 20px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+
+  /* Shown when JS toggles .open */
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  /* Hide navbar CTA on small screens to reduce clutter */
+  .nav-cta {
+    display: none;
+  }
+
+  #projects .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  section {
+    padding-top: 64px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 520px) {
+  .hero-name {
+    font-size: 2.1rem;
+  }
+
+  .hero-card {
+    max-width: 100%;
+  }
+
+  .about-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
